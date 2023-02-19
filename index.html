@@ -55,12 +55,18 @@
     <script>
       const generateCatButton = document.getElementById('generate-cat-button');
       const catPhoto = document.getElementById('cat-photo');
+      const catApiUrl = 'https://aws.random.cat/meow'; // use a different URL to get cat photos
       
       function generateCat() {
-        const img = document.createElement('img');
-        img.src = 'https://cataas.com/cat?' + new Date().getTime(); // add timestamp to bypass browser cache
-        catPhoto.innerHTML = '';
-        catPhoto.appendChild(img);
+        fetch(catApiUrl) // fetch the cat photo from the API URL
+          .then(response => response.json()) // parse the response as JSON
+          .then(data => {
+            const img = document.createElement('img');
+            img.src = data.file; // get the image file URL from the response
+            catPhoto.innerHTML = '';
+            catPhoto.appendChild(img);
+          })
+          .catch(error => console.error(error)); // handle any errors
       }
 
       generateCatButton.addEventListener('click', generateCat);
