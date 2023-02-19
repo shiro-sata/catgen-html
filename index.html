@@ -1,42 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Real-time Chat</title>
-  </head>
-  <body>
-    <div id="chat">
-      <div id="messages"></div>
-      <form id="message-form">
-        <input type="text" id="username" placeholder="Enter your username">
-        <input type="text" id="message" placeholder="Enter your message">
-        <button type="submit">Send</button>
-      </form>
-    </div>
-    <script>
-      const socket = new WebSocket('ws://localhost:3000');
+<h1>the website is still under development...</h1>
 
-      const messages = document.getElementById('messages');
-      const messageForm = document.getElementById('message-form');
-      const usernameInput = document.getElementById('username');
-      const messageInput = document.getElementById('message');
+<h1>&nbsp;</h1>
 
-      socket.onmessage = event => {
-        const data = JSON.parse(event.data);
-        const message = document.createElement('div');
-        message.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
-        messages.appendChild(message);
-      };
+<h2><span style="font-size:18px">things will soon be added, but we lack ideas... join the following whatsapp group to give us ideas! :</span></h2>
 
-      messageForm.addEventListener('submit', event => {
-        event.preventDefault();
-        const message = {
-          username: usernameInput.value,
-          message: messageInput.value
-        };
-        socket.send(JSON.stringify(message));
-        messageInput.value = '';
-      });
-    </script>
-  </body>
-</html>
+<h2><span style="font-size:18px">(whatsapp group.com...)</span></h2>
