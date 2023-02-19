@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Real-time Chat</title>
+  </head>
+  <body>
+    <div id="chat">
+      <div id="messages"></div>
+      <form id="message-form">
+        <input type="text" id="username" placeholder="Enter your username">
+        <input type="text" id="message" placeholder="Enter your message">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <script>
+      const socket = new WebSocket('ws://localhost:3000');
+
+      const messages = document.getElementById('messages');
+      const messageForm = document.getElementById('message-form');
+      const usernameInput = document.getElementById('username');
+      const messageInput = document.getElementById('message');
+
+      socket.onmessage = event => {
+        const data = JSON.parse(event.data);
+        const message = document.createElement('div');
+        message.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+        messages.appendChild(message);
+      };
+
+      messageForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const message = {
+          username: usernameInput.value,
+          message: messageInput.value
+        };
+        socket.send(JSON.stringify(message));
+        messageInput.value = '';
+      });
+    </script>
+  </body>
+</html>
