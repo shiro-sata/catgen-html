@@ -59,14 +59,14 @@
     <script>
       const generateCatButton = document.getElementById('generate-cat-button');
       const catPhoto = document.getElementById('cat-photo');
-      const catApiUrl = 'https://aws.random.cat/meow'; // use a different URL to get cat photos
+      const catApiUrl = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&category_ids=5';
       
       function generateCat() {
-        fetch(catApiUrl) // fetch the cat photo from the API URL
+        fetch(catApiUrl) // fetch the cat meme from the API URL
           .then(response => response.json()) // parse the response as JSON
           .then(data => {
             const img = document.createElement('img');
-            img.src = data.file; // get the image file URL from the response
+            img.src = data[0].url; // get the image URL from the response
             catPhoto.innerHTML = '';
             catPhoto.appendChild(img);
           })
