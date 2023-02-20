@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Random Meme Generator</title>
+    <style>
+      /* Add any CSS code here */
 
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #aebad5;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      #meme-image {
+        max-width: 500px;
+        max-height: 500px;
+        justify-content: center;
+      }
+
+      #meme-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #5cb85c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>generate YOUR meme !!</h1>
+    <button type="button" onclick="generateRandomMeme()">GOOOOOO !!!!</button>
+    <br>
+    <img id="meme-image" src="" alt="Meme Image">
+
+    <script>
+      function generateRandomMeme() {
+        const memeImage = document.getElementById("meme-image");
+
+        fetch("https://api.imgflip.com/get_memes")
+          .then(response => response.json())
+          .then(data => {
+            const memes = data.data.memes;
+            const randomMeme = memes[Math.floor(Math.random() * memes.length)];
+            memeImage.src = randomMeme.url;
+          })
+          .catch(error => console.error(error));
+      }
+    </script>
+    <h2><a href="https://chat.whatsapp.com/Hb2NaJVABYVEBcKtGRQEIv">join our whatsapp group !!</a></h2>
+    <h2><a href="https://github.Com/shrio-sata/catgen-html">cat and meme generator source code (GitHub)</a></h2>
+   
+    <h3> sorry if some images come back frequently</h3>
+    <h3>      the database is not big enough...</h3>
+  </body>
+</html>
